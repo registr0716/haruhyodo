@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>스마트 맞고 · 하루효도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+[hidden] { display: none !important; }
+/* 스마트 맞고: 앱 소개 머리(아이콘·휴대폰 둘) → 세 기둥 지그재그(데이터 그림) → 기능 표 → 자주 묻는 질문 */
+.app-head { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.app-head > * { min-width: 0; }
+.app-head .badge { display: flex; align-items: center; gap: 16px; }
+.app-head .badge img { width: 72px; height: 72px; border-radius: 20px; box-shadow: var(--shadow); }
+.phones { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 460px; justify-self: end; }
+.phones .bezel { padding: 7px; border-radius: 36px; background: color-mix(in srgb, var(--ink) 6%, transparent); box-shadow: 0 0 0 1px var(--hair), var(--shadow); }
+.phones .bezel img { border-radius: 30px; width: 100%; height: auto; }
+.phones .bezel:last-child { margin-top: 48px; }
+.status { margin-top: 28px; display: grid; gap: 4px; font-size: 15.5px; color: var(--ink-2); }
+.status b { color: var(--ink); }
+
+.zig { display: grid; gap: 104px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.row > * { min-width: 0; }
+.row.flip .text { order: 2; }
+.row .num { font-size: 15px; font-weight: 700; color: var(--jade); letter-spacing: 0.1em; }
+.row h3 { font-size: clamp(27px, 3vw, 38px); line-height: 1.28; margin-top: 12px; }
+.row p.desc { color: var(--ink-2); margin-top: 16px; font-size: 18px; max-width: 30em; }
+.row .lines { margin-top: 24px; }
+.viz-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; font-size: 14.5px; color: var(--ink-2); }
+.viz-title b { font-family: var(--display); font-size: 20px; color: var(--ink); }
+.chart { width: 100%; height: auto; overflow: visible; }
+.chart text { font-family: var(--body); font-size: 12px; fill: var(--ink-3); }
+.chart .bar { fill: var(--jade-soft); }
+.chart .bar.hit { fill: var(--jade); }
+.chart .goal { stroke: var(--seal); stroke-dasharray: 4 5; stroke-width: 1.5; fill: none; }
+.chart .goal-label { fill: var(--seal); font-weight: 600; }
+.brain { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.brain div { aspect-ratio: 1; max-width: 100%; border-radius: 10px; background: var(--jade-soft); display: grid; place-items: center; font-size: 14px; font-weight: 600; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.brain div.full { background: var(--jade); color: var(--sheet); }
+.brain-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin-top: 6px; text-align: center; font-size: 12.5px; color: var(--ink-3); }
+.brain-legend { display: flex; gap: 18px; margin-top: 14px; font-size: 14px; color: var(--ink-2); flex-wrap: wrap; }
+.games { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.games span { padding: 6px 14px; border-radius: 999px; background: var(--sheet); box-shadow: 0 0 0 1px var(--hair); font-size: 14.5px; color: var(--ink-2); }
+
+.spec { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.spec > div { min-width: 0; }
+.spec h3 { font-size: 22px; margin-bottom: 14px; }
+
+@media (max-width: 1000px) {
+  .app-head { grid-template-columns: 1fr; }
+  .phones { justify-self: start; }
+  .row, .row.flip { grid-template-columns: 1fr; gap: 36px; }
+  .row.flip .text { order: 0; }
+  .spec { grid-template-columns: 1fr; gap: 32px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./"><span class="seal">효</span>하루효도</a>
+    <nav class="menu" aria-label="주 메뉴">
+      <a href="./">홈</a>
+      <a href="smartmatgo.html" aria-current="page">스마트 맞고</a>
+      <a href="about.html">회사 소개</a>
+      <a href="support.html">고객센터</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap page-head app-head">
+    <div>
+      <div class="badge"><img src="img/matgo-icon.png" alt="스마트 맞고 아이콘" width="160" height="160"><span class="eyebrow">하루효도 첫 번째 앱</span></div>
+      <h1>맞고 한 판이<br>건강 기록이 됩니다</h1>
+      <p class="lead">AI와 치는 2인 맞고에 걸음·복약 기록, 두뇌 놀이, 가족 소식을 담았습니다. 부모님께 가장 익숙한 놀이로 하루를 채워 드려요.</p>
+      <div class="status">
+        <span><b>Android</b> · <a href="https://play.google.com/store/apps/details?id=fun.welead.smartmatgo" target="_blank" rel="noopener">Google Play</a>에서 서비스 중 (대한민국)</span>
+        <span><b>이용료</b> 무료 · 광고 포함 · 광고 제거 상품 있음</span>
+      </div>
+    </div>
+    <div class="phones">
+      <div class="bezel"><img src="img/matgo-table.jpg" alt="스마트 맞고 첫 화면: 집과 비서, 바로 시작 버튼" width="420" height="746"></div>
+      <div class="bezel"><img src="img/matgo-lobby.jpg" alt="건강 수첩: 오늘 걸음 4,210보, 약 챙기기" width="420" height="746"></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap zig">
+      <div class="row">
+        <div class="text reveal">
+          <span class="num">생활 기록</span>
+          <h3>걸음과 약, 물 한 잔까지<br>하루가 저절로 쌓여요</h3>
+          <p class="desc">휴대폰 걸음 센서가 오늘 걸음을 세고, 약 드실 시간에는 알림이 와요. "드셨어요" 한 번이면 기록이 남습니다.</p>
+          <ul class="lines"><li>오늘 걸음과 목표 <span>휴대폰 센서</span></li><li>복약 알림과 기록 <span>하루 최대 4번</span></li><li>물 마시기 <span>하루 8잔 목표</span></li></ul>
+        </div>
+        <div class="shell reveal"><div class="core">
+          <div class="viz-title"><b>지난 7일 걸음</b><span>예시 · 목표 5,000걸음</span></div>
+          <svg class="chart" viewBox="0 0 420 222" role="img" aria-label="지난 7일 걸음 막대 그래프, 7일 중 2일 목표 달성">
+            <!-- y: 0~7,000걸음 → 190~10px (1,000걸음 = 25.7px) -->
+            <line x1="40" x2="414" y1="61.4" y2="61.4" class="goal"/><text x="414" y="54" text-anchor="end" class="goal-label">목표 5,000</text>
+            <text x="0" y="194">0</text><text x="0" y="104">3,500</text>
+            <rect class="bar" x="44" y="109.8" width="36" height="80.2" rx="8"/>
+            <rect class="bar" x="98" y="72.3" width="36" height="117.7" rx="8"/>
+            <rect class="bar" x="152" y="115.7" width="36" height="74.3" rx="8"/>
+            <rect class="bar hit" x="206" y="55.6" width="36" height="134.4" rx="8"/>
+            <rect class="bar" x="260" y="76.7" width="36" height="113.3" rx="8"/>
+            <rect class="bar hit" x="314" y="35.3" width="36" height="154.7" rx="8"/>
+            <rect class="bar" x="368" y="81.8" width="36" height="108.2" rx="8"/>
+            <g text-anchor="middle"><text x="62" y="214">목</text><text x="116" y="214">금</text><text x="170" y="214">토</text><text x="224" y="214">일</text><text x="278" y="214">월</text><text x="332" y="214">화</text><text x="386" y="214">오늘</text></g>
+          </svg>
+          <p class="muted" style="font-size:14px;margin-top:10px">3,120 · 4,580 · 2,890 · 5,230 · 4,410 · 6,020 · 4,210걸음 · 목표 달성 2일</p>
+        </div></div>
+      </div>
+
+      <div class="row flip">
+        <div class="text reveal">
+          <span class="num">두뇌 놀이</span>
+          <h3>짝 찾고, 점수 세고,<br>고·스톱을 고르는 사이</h3>
+          <p class="desc">맞고는 같은 달 패를 찾아 기억하고 점수를 셈하며 판단하는 놀이예요. 화투 퍼즐과 퀴즈까지 더해 하루 두뇌 놀이 목표를 채우고 주간 기록으로 봅니다.</p>
+          <div class="games"><span>맞고</span><span>사천성</span><span>짝맞추기</span><span>재수 보기</span><span>오늘의 퀴즈</span><span>팔도 원정</span></div>
+        </div>
+        <div class="shell reveal"><div class="core">
+          <div class="viz-title"><b>이번 주 두뇌 놀이</b><span>예시 · 하루 목표 5번</span></div>
+          <div class="brain" aria-label="요일별 두뇌 놀이 횟수"><div>3</div><div class="full">6</div><div>4</div><div class="full">5</div><div class="full">7</div><div>2</div><div class="full">5</div></div>
+          <div class="brain-days" aria-hidden="true"><span>목</span><span>금</span><span>토</span><span>일</span><span>월</span><span>화</span><span>오늘</span></div>
+          <div class="brain-legend"><span>목표 달성 4일</span><span>합계 32번</span></div>
+        </div></div>
+      </div>
+
+      <div class="row">
+        <div class="text reveal">
+          <span class="num">가족 소식</span>
+          <h3>전화를 기다리지 않아도<br>오늘을 압니다</h3>
+          <p class="desc">매일 정한 시각, 오늘 즐기신 놀이와 걸음·복약 기록이 자녀분 카카오톡으로 갑니다. 게임머니나 승패는 보내지 않고 활동만 담아요.</p>
+          <ul class="lines"><li>자동 발송 <span>매일 정한 시각</span></li><li>받는 가족 <span>최대 5명</span></li><li>활동이 없던 날 <span>안부 전화 권유</span></li></ul>
+          <p class="muted" style="font-size:15px;margin-top:14px">카카오톡 자동 발송은 채널 준비가 끝나면 시작합니다. 그 전에는 앱에서 오늘 소식을 가족에게 바로 공유하실 수 있어요.</p>
+        </div>
+        <div class="shell reveal"><div class="core">
+          <div class="kakao-bg">
+            <span class="meta">하루효도 · 오후 8:00</span>
+            <div class="bubble"><b>김순자님의 오늘 소식</b>• 맞고를 5판 즐기셨어요.<br>• 오늘의 퀴즈를 푸셨어요.<br>• 오늘 4,210걸음 걸으셨어요 (목표까지 790걸음).<br>• 약을 모두 챙겨 드셨어요 (2/2).</div>
+            <div class="reply">엄마 오늘도 잘 지내셨네요. 주말에 갈게요!</div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">한눈에 보기</span>
+        <h2>처음부터 쉽게, 오래 즐겁게</h2>
+      </div>
+      <div class="spec reveal">
+        <div><h3>쉽게 시작</h3><ul class="lines"><li>회원 가입 <span>필요 없음</span></li><li>글씨 크기 <span>3단계</span></li><li>처음 안내 <span>첫 판 도움말 포함</span></li><li>상대 난이도 <span>처음엔 쉬움</span></li></ul></div>
+        <div><h3>매일 즐길 거리</h3><ul class="lines"><li>출석·재산 키우기 <span>매일</span></li><li>팔도 원정 <span>지역 도장</span></li><li>오늘의 운세·퀴즈 <span>하루 한 번</span></li><li>민요 라디오 <span>배경 음악</span></li></ul></div>
+        <div><h3>기록과 안심</h3><ul class="lines"><li>기록 보관 <span>Google 로그인 선택</span></li><li>새 휴대폰 <span>기록 이어 하기</span></li><li>기록 삭제 <span>설정에서 바로</span></li><li>알림 <span>밤 9시~아침 8시 조용히</span></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">자주 묻는 질문</span><h2>스마트 맞고가 궁금하세요?</h2></div>
+      <div class="faq reveal">
+        <details><summary>돈이 드나요?</summary><p>무료로 모든 놀이를 즐기실 수 있습니다. 광고가 나오며, 광고를 없애는 상품만 판매합니다. 게임머니(냥)는 팔지 않습니다.</p></details>
+        <details><summary>게임머니(냥)를 현금으로 바꿀 수 있나요?</summary><p>아니요. 냥은 게임 안에서만 쓰는 점수이고 현금 가치가 없으며 환전되지 않습니다. 상대는 사람이 아닌 AI입니다.</p></details>
+        <details><summary>꼭 로그인해야 하나요?</summary><p>아니요. 손님으로 바로 시작하실 수 있습니다. Google 계정으로 로그인하시면 기록이 보관되어 휴대폰을 바꿔도 이어서 하실 수 있습니다.</p></details>
+        <details><summary>가족 소식은 어떻게 받나요?</summary><p>앱의 가족 소식에서 초대 링크를 자녀분께 보내면, 자녀분이 이름과 번호를 넣고 동의하신 날 저녁부터 카카오톡으로 받습니다. 언제든 받지 않기를 누를 수 있습니다.</p></details>
+        <details><summary>아이폰에서도 되나요?</summary><p>지금은 Android(Google Play)에서 이용하실 수 있습니다.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <div class="cols">
+    <div class="about"><a class="logo" href="./"><span class="seal">효</span>하루효도</a><p>놀이가 건강이 되고, 하루가 효도가 됩니다. 위리드코퍼레이션이 만드는 시니어 생활 서비스입니다.</p></div>
+    <div><h4>서비스</h4><ul><li><a href="smartmatgo.html">스마트 맞고</a></li><li><a href="./#services">준비 중인 서비스</a></li><li><a href="about.html">회사 소개</a></li></ul></div>
+    <div><h4>고객 지원</h4><ul><li><a href="support.html">고객센터 · 자주 묻는 질문</a></li><li><a href="https://registr0716.github.io/smartmatgo/privacy.html" target="_blank" rel="noopener"><b>개인정보처리방침</b></a></li><li><a href="https://registr0716.github.io/smartmatgo/terms.html" target="_blank" rel="noopener">이용약관</a></li><li><a href="https://registr0716.github.io/smartmatgo/delete.html" target="_blank" rel="noopener">계정·기록 삭제 안내</a></li></ul></div>
+  </div>
+  <div class="biz">
+    <div class="row-b"><span><b>상호</b>주식회사 위리드코퍼레이션</span><span><b>대표</b>정종혁, 이광섭</span><span><b>사업자등록번호</b>269-81-03134</span><span><b>통신판매업 신고</b>제2026-서울광진-1654호</span></div>
+    <div class="row-b"><span><b>주소</b>서울특별시 광진구 광나루로 478, 광진경제허브센터 도약관 306호</span><span><b>고객 문의</b>support@welead.fun</span><span><b>카카오톡 채널</b>하루효도</span></div>
+    <span class="copy">© 2026 WeLead Corporation. All rights reserved.</span>
+  </div>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>

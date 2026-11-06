@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>고객센터 · 하루효도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+[hidden] { display: none !important; }
+/* 고객센터: 문의 길 두 개(메일·카카오톡) → 자주 묻는 질문 → 정책 문서 → 기록·소식 끄는 법 */
+.ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.ways .core { display: grid; gap: 12px; align-content: start; padding: 32px; }
+.ways h3 { font-size: 24px; }
+.ways p { color: var(--ink-2); }
+.ways .copyline { font-size: 19px; }
+.kakao-dot { width: 40px; height: 40px; border-radius: 12px; background: var(--kakao); color: var(--kakao-ink); display: grid; place-items: center; font-weight: 800; font-size: 15px; }
+.mail-dot { width: 40px; height: 40px; border-radius: 12px; background: var(--jade-soft); color: var(--jade); display: grid; place-items: center; }
+.mail-dot svg { width: 20px; height: 20px; }
+.docs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.docs a { text-decoration: none; display: grid; gap: 8px; padding: 26px; border-radius: 24px; background: var(--sheet); box-shadow: 0 0 0 1px var(--hair); transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+.docs a:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--hair), var(--shadow); }
+.docs h3 { font-size: 20px; display: flex; justify-content: space-between; gap: 12px; }
+.docs h3::after { content: "↗"; font-family: var(--body); color: var(--jade); font-weight: 400; }
+.docs p { color: var(--ink-2); font-size: 15.5px; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; border-top: 1px solid var(--hair); }
+.steps li { padding: 22px 0; border-bottom: 1px solid var(--hair); display: grid; gap: 6px; }
+.steps h3 { font-size: 20px; }
+.steps p { color: var(--ink-2); font-size: 16.5px; }
+.steps .path { font-weight: 600; color: var(--ink); }
+@media (max-width: 900px) {
+  .ways, .steps { grid-template-columns: 1fr; }
+  .docs { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./"><span class="seal">효</span>하루효도</a>
+    <nav class="menu" aria-label="주 메뉴">
+      <a href="./">홈</a>
+      <a href="smartmatgo.html">스마트 맞고</a>
+      <a href="about.html">회사 소개</a>
+      <a href="support.html" aria-current="page">고객센터</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap page-head">
+    <span class="eyebrow">고객센터</span>
+    <h1>무엇이든 편하게 물어보세요</h1>
+    <p class="lead">부모님이 직접 물어보셔도, 자녀분이 대신 물어보셔도 됩니다. 평일에 차례로 답해 드립니다.</p>
+  </div>
+
+  <section style="padding-top:48px">
+    <div class="wrap ways reveal">
+      <div class="shell"><div class="core">
+        <span class="kakao-dot" aria-hidden="true">톡</span>
+        <h3>카카오톡으로 문의</h3>
+        <p>카카오톡 검색창에서 <b>하루효도</b>를 찾아 채널을 추가하고 메시지를 남겨 주세요.</p>
+      </div></div>
+      <div class="shell"><div class="core">
+        <span class="mail-dot" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="4.5" width="15" height="11" rx="2"/><path d="m3 5.5 7 5.5 7-5.5"/></svg></span>
+        <h3>메일로 문의</h3>
+        <span class="copyline"><code>support@welead.fun</code><button type="button" data-copy="support@welead.fun">주소 복사</button></span>
+        <p>사용하시는 앱 이름과 휴대폰 기종을 함께 적어 주시면 더 빨리 도와 드릴 수 있어요.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">자주 묻는 질문</span><h2>많이 물어보시는 것</h2></div>
+      <div class="faq reveal">
+        <details><summary>하루효도는 어떤 서비스인가요?</summary><p>부모님 세대를 위한 놀이·생활 앱 모음입니다. 첫 앱은 스마트 맞고이며, 앱에서 쌓인 걸음·두뇌 놀이·복약 기록을 가족에게 카카오톡으로 전해 드립니다.</p></details>
+        <details><summary>회원 가입을 해야 하나요?</summary><p>아니요. 손님으로 바로 쓰실 수 있습니다. 기록을 보관하고 싶으시면 Google 계정으로 로그인하세요. 휴대폰을 바꿔도 기록을 이어 갈 수 있습니다.</p></details>
+        <details><summary>휴대폰을 바꿨어요. 기록을 옮길 수 있나요?</summary><p>예전 휴대폰에서 Google 계정으로 로그인해 두셨다면, 새 휴대폰의 설정 → 기록 지키기에서 같은 계정으로 로그인하시고 "계정에 저장된 기록"을 고르시면 됩니다.</p></details>
+        <details><summary>글씨가 너무 작아요.</summary><p>앱의 설정에서 글씨 크기를 세 단계 중에 고르실 수 있습니다. 처음 안내에서도 먼저 골라 드려요.</p></details>
+        <details><summary>광고를 없앨 수 있나요?</summary><p>스마트 맞고 상점의 광고 제거 상품을 구입하시면 광고가 나오지 않습니다. 결제는 Google Play로 진행되고 환불도 Google Play 정책을 따릅니다.</p></details>
+        <details><summary>약 알림이 제때 안 와요.</summary><p>휴대폰 설정에서 앱 알림이 켜져 있는지, 배터리 절약 모드가 앱을 막고 있지 않은지 확인해 주세요. 그래도 안 되면 휴대폰 기종을 적어 문의해 주세요.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">기록과 소식 관리</span><h2>언제든 끄고, 지울 수 있어요</h2></div>
+      <ul class="steps reveal">
+        <li><h3>가족 소식 받지 않기</h3><p>받는 분: 카카오톡 소식의 <span class="path">받지 않기</span>를 누르세요. 번호는 바로 지워집니다. 보내는 분: 앱의 <span class="path">가족 소식</span>에서 받는 가족을 지울 수 있습니다.</p></li>
+        <li><h3>혜택·이벤트 알림 끄기</h3><p>앱의 <span class="path">설정 → 알림</span>에서 혜택·이벤트 알림을 끄세요. 약 알림 같은 생활 알림은 그대로 옵니다.</p></li>
+        <li><h3>내 기록 지우기</h3><p>앱의 <span class="path">설정 → 내 기록 지우기</span>에서 휴대폰에 저장된 기록을 지울 수 있습니다.</p></li>
+        <li><h3>계정 삭제</h3><p>Google로 로그인하셨다면 <span class="path">설정 → 계정 삭제</span>에서 계정과 보관된 기록을 함께 지울 수 있습니다. 앱을 지운 뒤라면 메일로 요청해 주세요.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">정책 문서</span><h2>약관과 개인정보</h2></div>
+      <div class="docs reveal">
+        <a href="https://registr0716.github.io/smartmatgo/privacy.html" target="_blank" rel="noopener"><h3>개인정보처리방침</h3><p>어떤 정보를 왜 모으고, 얼마나 보관하며, 누구에게 맡기는지</p></a>
+        <a href="https://registr0716.github.io/smartmatgo/terms.html" target="_blank" rel="noopener"><h3>이용약관</h3><p>서비스 이용 조건, 유료 상품과 환불, 게임머니의 성격</p></a>
+        <a href="https://registr0716.github.io/smartmatgo/delete.html" target="_blank" rel="noopener"><h3>계정·기록 삭제 안내</h3><p>앱 안에서 지우는 방법과 앱 없이 삭제를 요청하는 방법</p></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <div class="cols">
+    <div class="about"><a class="logo" href="./"><span class="seal">효</span>하루효도</a><p>놀이가 건강이 되고, 하루가 효도가 됩니다. 위리드코퍼레이션이 만드는 시니어 생활 서비스입니다.</p></div>
+    <div><h4>서비스</h4><ul><li><a href="smartmatgo.html">스마트 맞고</a></li><li><a href="./#services">준비 중인 서비스</a></li><li><a href="about.html">회사 소개</a></li></ul></div>
+    <div><h4>고객 지원</h4><ul><li><a href="support.html">고객센터 · 자주 묻는 질문</a></li><li><a href="https://registr0716.github.io/smartmatgo/privacy.html" target="_blank" rel="noopener"><b>개인정보처리방침</b></a></li><li><a href="https://registr0716.github.io/smartmatgo/terms.html" target="_blank" rel="noopener">이용약관</a></li><li><a href="https://registr0716.github.io/smartmatgo/delete.html" target="_blank" rel="noopener">계정·기록 삭제 안내</a></li></ul></div>
+  </div>
+  <div class="biz">
+    <div class="row-b"><span><b>상호</b>주식회사 위리드코퍼레이션</span><span><b>대표</b>정종혁, 이광섭</span><span><b>사업자등록번호</b>269-81-03134</span><span><b>통신판매업 신고</b>제2026-서울광진-1654호</span></div>
+    <div class="row-b"><span><b>주소</b>서울특별시 광진구 광나루로 478, 광진경제허브센터 도약관 306호</span><span><b>고객 문의</b>support@welead.fun</span><span><b>카카오톡 채널</b>하루효도</span></div>
+    <span class="copy">© 2026 WeLead Corporation. All rights reserved.</span>
+  </div>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>
