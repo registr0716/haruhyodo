@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>이거 좀 봐 줄래 · 하루효도</title>
+<meta name="description" content="부모님이 휴대폰에서 막히면 버튼 하나로 가족에게 화면을 보여 주고, 가족은 화면 위에 동그라미를 그려 알려 드리는 하루효도 앱.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+/* 이거 좀 봐 줄래: 앱 머리(아이콘·휴대폰 둘) → 두 사람을 잇는 그림 + 세 걸음 → 약속 지그재그 → 한눈에 → 자주 묻는 질문 */
+.app-head { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.app-head > * { min-width: 0; }
+.app-head .badge { display: flex; align-items: center; gap: 16px; }
+.app-head .badge img { width: 72px; height: 72px; border-radius: 20px; box-shadow: var(--shadow); }
+.app-head h1 .mark { position: relative; white-space: nowrap; }
+.app-head h1 .mark::after { content: ""; position: absolute; left: -0.18em; right: -0.18em; top: 0.02em; bottom: -0.04em; border: 3px solid #D93A30; border-radius: 50%; transform: rotate(-3deg); pointer-events: none; }
+.phones { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 460px; justify-self: end; }
+.phones .bezel { padding: 7px; border-radius: 36px; background: color-mix(in srgb, var(--ink) 6%, transparent); box-shadow: 0 0 0 1px var(--hair), var(--shadow); }
+.phones .bezel img { border-radius: 30px; width: 100%; height: auto; }
+.phones .bezel:last-child { margin-top: 48px; }
+.status { margin-top: 28px; display: grid; gap: 4px; font-size: 15.5px; color: var(--ink-2); }
+.status b { color: var(--ink); }
+
+.scene { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+.scene > * { min-width: 0; }
+.scene .art { width: 100%; height: auto; }
+.walk { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; border-top: 1px solid var(--hair); }
+.walk li { display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--hair); }
+.walk .n { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--jade); color: var(--sheet); font-family: var(--display); font-weight: 700; font-size: 18px; }
+.walk time { font-size: 14px; color: var(--jade); font-weight: 600; }
+.walk h3 { font-size: 22px; margin-top: 2px; }
+.walk p { color: var(--ink-2); font-size: 16.5px; margin-top: 4px; }
+
+.zig { display: grid; gap: 104px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.row > * { min-width: 0; }
+.row.flip .text { order: 2; }
+.row .num { font-size: 15px; font-weight: 700; color: var(--jade); letter-spacing: 0.1em; }
+.row h3 { font-size: clamp(27px, 3vw, 38px); line-height: 1.28; margin-top: 12px; }
+.row p.desc { color: var(--ink-2); margin-top: 16px; font-size: 18px; max-width: 30em; }
+.row .lines { margin-top: 24px; }
+.row .shot { display: flex; justify-content: center; }
+.row .shot .bezel { width: min(320px, 80%); padding: 7px; border-radius: 36px; background: color-mix(in srgb, var(--ink) 6%, transparent); box-shadow: 0 0 0 1px var(--hair), var(--shadow); }
+.row .shot .bezel img { border-radius: 30px; width: 100%; height: auto; }
+.not { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.not li { padding: 6px 14px; border-radius: 999px; background: var(--sheet); box-shadow: 0 0 0 1px var(--hair); font-size: 14.5px; color: var(--ink-2); }
+.not li::before { content: "✕ "; color: var(--ink-3); }
+
+.spec { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.spec > div { min-width: 0; }
+.spec h3 { font-size: 22px; margin-bottom: 14px; }
+
+@media (max-width: 1000px) {
+  .app-head, .scene { grid-template-columns: 1fr; }
+  .phones { justify-self: start; }
+  .row, .row.flip { grid-template-columns: 1fr; gap: 36px; }
+  .row.flip .text { order: 0; }
+  .spec { grid-template-columns: 1fr; gap: 32px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./"><span class="seal">효</span>하루효도</a>
+    <nav class="menu" aria-label="주 메뉴">
+      <a href="./">홈</a>
+      <a href="smartmatgo.html">스마트 맞고</a>
+      <a href="look.html" aria-current="page">이거 좀 봐 줄래</a>
+      <a href="about.html">회사 소개</a>
+      <a href="support.html">고객센터</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap page-head app-head">
+    <div>
+      <div class="badge"><img src="img/look-icon.png" alt="이거 좀 봐 줄래 아이콘: 휴대폰 화면 위 빨간 동그라미와 효 도장" width="160" height="160"><span class="eyebrow">하루효도 두 번째 앱</span></div>
+      <h1>막히면 버튼 하나,<br>가족이 <span class="mark">짚어</span> 드려요</h1>
+      <p class="lead">"그거 어디 있어?" 전화로 설명하기 어려운 휴대폰 문제. 부모님이 버튼 하나만 누르면 자녀 휴대폰이 울리고, 자녀가 부모님 화면을 함께 보며 눌러야 할 곳에 동그라미를 그려 드려요.</p>
+      <div class="status">
+        <span><b>Android</b> · Google Play 출시 준비 중 (내부 테스트)</span>
+        <span><b>이용료</b> 무료 · 광고 없음 · 회원 가입 없음</span>
+      </div>
+    </div>
+    <div class="phones">
+      <div class="bezel"><img src="img/look-home.jpg" alt="부모님 화면: 초록 큰 판 '이거 좀 봐 줄래?', 누르면 민수님 휴대폰이 울려요" width="420" height="934"></div>
+      <div class="bezel"><img src="img/look-viewer.jpg" alt="가족 화면: 엄마님 화면을 보며 앱 아이콘에 빨간 동그라미를 그린 모습" width="420" height="934"></div>
+    </div>
+  </div>
+
+  <section class="tint">
+    <div class="wrap scene">
+      <img class="art reveal" src="img/look-together.webp" alt="소파에 앉아 휴대폰을 든 어머니와 사무실에서 벨이 울리는 휴대폰을 든 아들, 그 사이 화면 위 빨간 동그라미" width="1200" height="620">
+      <div class="reveal">
+        <div class="head" style="margin-bottom:28px"><span class="eyebrow">이렇게 도와드려요</span><h2>세 걸음이면<br>끝나요</h2></div>
+        <ol class="walk">
+          <li><span class="n">1</span><div><time>부모님 휴대폰</time><h3>[이거 좀 봐 줄래?]</h3><p>막힌 화면에서 앱을 열고 큰 초록 판을 누른 뒤 [시작]을 눌러요.</p></div></li>
+          <li><span class="n">2</span><div><time>자녀 휴대폰</time><h3>벨이 울리면 [받기]</h3><p>연결해 둔 가족의 휴대폰이 전화처럼 울려요. 먼저 받은 한 사람이 도와요.</p></div></li>
+          <li><span class="n">3</span><div><time>함께 보며</time><h3>동그라미와 목소리로</h3><p>자녀가 화면에 그린 동그라미가 부모님 화면에도 떠요. 누르는 건 부모님이 직접.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap zig">
+      <div class="row">
+        <div class="text reveal">
+          <span class="num">안심하고</span>
+          <h3>부모님이 시작해야만<br>화면이 보여요</h3>
+          <p class="desc">원격 조작 앱이 아니에요. 가족은 보고, 그리고, 말로만 도울 수 있어요. 보여 주기 전에 무엇이 보이고 무엇이 남는지 매번 알려 드려요.</p>
+          <ul class="lines"><li>시작 <span>부모님만, 매번 Android 동의</span></li><li>보는 사람 <span>부모님이 [네]를 누른 가족만</span></li><li>녹화·저장 <span>하지 않음, 기기끼리 암호화</span></li><li>은행·결제 화면 <span>가족에게 까맣게 가려짐</span></li></ul>
+          <ul class="not" aria-label="하지 않는 것"><li>원격 조작</li><li>접근성 권한</li><li>송금·계좌 요구</li><li>광고</li></ul>
+        </div>
+        <div class="shot reveal"><div class="bezel"><img src="img/look-guide.jpg" alt="시작 전 안내: 녹화되지 않아요, 연결한 가족만 봐요, 가족은 보기만 해요, 은행 화면은 가족에게 안 보여요" width="420" height="934"></div></div>
+      </div>
+
+      <div class="row flip">
+        <div class="text reveal">
+          <span class="num">자녀에게</span>
+          <h3>"왼쪽 위요, 아니 그거 말고요"<br>대신 동그라미 하나</h3>
+          <p class="desc">벨이 울리면 회사에서도 바로 받아 부모님 화면을 봐요. 손가락으로 그린 선과 동그라미는 4초 뒤 사라지고, 지우기·소리 끄기·끊기는 늘 아래에 있어요.</p>
+          <ul class="lines"><li>연결까지 <span>보통 몇 초</span></li><li>한 번에 <span>최대 20분, 지나면 자동 종료</span></li><li>여러 부모님 <span>친정·시댁 모두 연결 가능</span></li></ul>
+        </div>
+        <div class="shot reveal"><div class="bezel"><img src="img/look-incoming.jpg" alt="가족 벨 화면: 엄마님이 화면을 보여 주려고 해요, 받기 버튼" width="420" height="934"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">한눈에 보기</span><h2>부모님 손에 맞췄어요</h2></div>
+      <div class="spec reveal">
+        <div><h3>쉽게 시작</h3><ul class="lines"><li>회원 가입 <span>필요 없음</span></li><li>글씨 크기 <span>3단계</span></li><li>주 버튼 <span>한 화면에 하나</span></li><li>이름 <span>"엄마"처럼 부를 이름만</span></li></ul></div>
+        <div><h3>가족 연결</h3><ul class="lines"><li>초대 <span>6자리 번호를 카카오톡으로</span></li><li>승인 <span>부모님이 [네, 맞아요]</span></li><li>번호 유효 <span>7일</span></li><li>연결 끊기 <span>설정에서 바로</span></li></ul></div>
+        <div><h3>기록과 안심</h3><ul class="lines"><li>남는 기록 <span>누가·언제·몇 분</span></li><li>화면·음성 <span>저장 안 함</span></li><li>기록 지우기 <span>설정에서 모두</span></li><li>휴대폰 <span>Android끼리 (아이폰 준비 중)</span></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">자주 묻는 질문</span><h2>이거 좀 봐 줄래가 궁금하세요?</h2></div>
+      <div class="faq reveal">
+        <details><summary>가족이 제 휴대폰을 마음대로 볼 수 있나요?</summary><p>아니요. 부모님이 [이거 좀 봐 줄래?]를 누르고 Android 화면 공유 동의에서 [시작]을 눌러야만 보입니다. 가족이 먼저 연결을 걸 수 없고, 부모님이 승인한 가족만 받을 수 있습니다.</p></details>
+        <details><summary>가족이 제 휴대폰을 조작하나요?</summary><p>아니요. 가족은 화면을 보고, 화면 위에 동그라미·선을 그리고, 말로 알려 드리는 것만 할 수 있습니다. 누르는 것은 언제나 부모님이 직접 하십니다.</p></details>
+        <details><summary>화면이 녹화되거나 저장되나요?</summary><p>아니요. 화면과 음성은 두 휴대폰 사이에서 암호화되어 실시간으로만 오가고, 하루효도 서버에 저장되지 않습니다. 기록에는 누가, 언제, 몇 분 봤는지만 남습니다.</p></details>
+        <details><summary>은행 앱을 볼 때는요?</summary><p>은행·결제처럼 Android가 보호하는 화면은 가족에게 까맣게 보입니다. 이때는 말로만 안내받으세요. 하루효도는 앱 설치·송금·계좌 번호를 절대 요구하지 않습니다.</p></details>
+        <details><summary>돈이 드나요?</summary><p>무료이고 광고가 없습니다.</p></details>
+        <details><summary>아이폰에서도 되나요?</summary><p>지금은 Android 휴대폰끼리 쓸 수 있습니다. 도와줄 가족이 아이폰이면 앱에서 대기 등록을 해 두시면 준비되는 대로 알려 드립니다.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="closing reveal">
+      <div>
+        <h2>막힐 때마다 미안해하지<br>않으셔도 돼요</h2>
+        <p>Google Play 공개 출시를 준비하고 있어요. 먼저 써 보고 싶으시면 고객센터로 알려 주세요.</p>
+      </div>
+      <a class="btn solid" href="support.html">고객센터<span class="dot"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10 10 4M5 4h5v5"/></svg></span></a>
+    </div>
+  </div>
+</main>
+
+<footer class="wrap foot">
+  <div class="cols">
+    <div class="about"><a class="logo" href="./"><span class="seal">효</span>하루효도</a><p>놀이가 건강이 되고, 하루가 효도가 됩니다. 위리드코퍼레이션이 만드는 시니어 생활 서비스입니다.</p></div>
+    <div><h4>서비스</h4><ul><li><a href="smartmatgo.html">스마트 맞고</a></li><li><a href="look.html">이거 좀 봐 줄래</a></li><li><a href="./#services">준비 중인 서비스</a></li><li><a href="about.html">회사 소개</a></li></ul></div>
+    <div><h4>고객 지원</h4><ul><li><a href="support.html">고객센터 · 자주 묻는 질문</a></li><li><a href="look-privacy.html"><b>개인정보처리방침</b></a></li><li><a href="look-terms.html">이용약관</a></li></ul></div>
+  </div>
+  <div class="biz">
+    <div class="row-b"><span><b>상호</b>주식회사 위리드코퍼레이션</span><span><b>대표</b>정종혁, 이광섭</span><span><b>사업자등록번호</b>269-81-03134</span><span><b>통신판매업 신고</b>제2026-서울광진-1654호</span></div>
+    <div class="row-b"><span><b>주소</b>서울특별시 광진구 광나루로 478, 광진경제허브센터 도약관 306호</span><span><b>고객 문의</b>support@welead.fun</span><span><b>카카오톡 채널</b>하루효도</span></div>
+    <span class="copy">© 2026 WeLead Corporation. All rights reserved.</span>
+  </div>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>

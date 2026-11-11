@@ -53,6 +53,14 @@
 .b-sec .cap { padding: 22px 28px 26px; }
 .b-sec .cap h3 { font-size: 22px; }
 .b-sec .cap p { color: var(--ink-2); font-size: 16px; margin-top: 6px; }
+.b-look { grid-column: span 12; }
+.b-look .core { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+.b-look .core > * { min-width: 0; }
+.b-look .txt { display: grid; gap: 22px; align-content: start; }
+.b-look .title { display: flex; align-items: center; gap: 18px; }
+.b-look .title img { width: 80px; height: 80px; border-radius: 22px; }
+.b-look h3 { font-size: 36px; }
+.b-look .pic { width: 100%; height: auto; }
 .b-soon { grid-column: span 3; }
 .b-soon .core { display: grid; gap: 10px; align-content: start; padding: 26px; }
 .b-soon h3 { font-size: 21px; }
@@ -83,6 +91,7 @@ section.tint .step .n { background: var(--paper-2); }
   .hero { grid-template-columns: 1fr; padding-block: 48px 40px; }
   .stage { height: 540px; max-width: 520px; width: 100%; margin: 0 auto; }
   .b-main, .b-sec { grid-column: span 12; }
+  .b-look .core { grid-template-columns: 1fr; }
   .b-soon { grid-column: span 6; }
   .promise { grid-template-columns: 1fr; gap: 40px; }
 }
@@ -105,6 +114,7 @@ section.tint .step .n { background: var(--paper-2); }
     <nav class="menu" aria-label="주 메뉴">
       <a href="./" aria-current="page">홈</a>
       <a href="smartmatgo.html">스마트 맞고</a>
+      <a href="look.html">이거 좀 봐 줄래</a>
       <a href="about.html">회사 소개</a>
       <a href="support.html">고객센터</a>
     </nav>
@@ -144,7 +154,7 @@ section.tint .step .n { background: var(--paper-2); }
       <div class="head reveal">
         <span class="eyebrow">하루효도 서비스</span>
         <h2>놀이마다 앱 하나씩,<br>기록은 하루효도 하나로</h2>
-        <p>하루효도는 부모님의 건강한 하루(걸음·복약·물 마시기 기록), 두뇌 놀이, 매일 저녁 가족 안부를 하나로 잇는 시니어 생활 서비스입니다. 지금은 첫 앱 스마트 맞고 안에서 건강 수첩·두뇌 놀이·가족 소식을 제공하고, 화투 퍼즐·하루효도 가족 앱을 차례로 준비하고 있습니다.</p>
+        <p>하루효도는 부모님의 건강한 하루(걸음·복약·물 마시기 기록), 두뇌 놀이, 매일 저녁 가족 안부를 하나로 잇는 시니어 생활 서비스입니다. 첫 앱 스마트 맞고 안에서 건강 수첩·두뇌 놀이·가족 소식을 제공하고, 두 번째 앱 이거 좀 봐 줄래로 휴대폰에서 막힐 때 가족에게 바로 도움을 받으실 수 있게 합니다. 화투 퍼즐·하루효도 가족 앱도 차례로 준비하고 있습니다.</p>
       </div>
       <div class="bento">
         <article class="shell b-main reveal"><div class="core">
@@ -156,6 +166,15 @@ section.tint .step .n { background: var(--paper-2); }
         <article class="shell b-sec reveal"><div class="core">
           <img src="img/secretary.jpg" alt="정장을 입고 태블릿을 든 비서 캐릭터" width="360" height="360">
           <div class="cap"><h3>다정한 비서가 곁에</h3><p>매일 인사하고, 약 드실 시간과 오늘 할 일을 챙겨 드려요.</p></div>
+        </div></article>
+        <article class="shell b-look reveal"><div class="core">
+          <div class="txt">
+            <div class="title"><img src="img/look-icon.png" alt="이거 좀 봐 줄래 아이콘" width="160" height="160"><div><span class="pill">Google Play 출시 준비 중</span><h3>이거 좀 봐 줄래</h3></div></div>
+            <p class="muted" style="font-size:18px;max-width:30em">휴대폰에서 막히면 버튼 하나로 자녀에게 화면을 보여 드리세요. 자녀가 화면을 함께 보며 눌러야 할 곳에 동그라미를 그려 드려요. 녹화하지 않고, 조작하지 않고, 부모님이 시작할 때만.</p>
+            <div class="facts"><div><b>버튼 1개</b><span>부모님이 누를 것</span></div><div><b>0원</b><span>무료 · 광고 없음</span></div><div><b>저장 0</b><span>화면·음성 녹화 안 함</span></div></div>
+            <a class="btn line" href="look.html" style="justify-self:start">자세히 보기<span class="dot"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10 10 4M5 4h5v5"/></svg></span></a>
+          </div>
+          <img class="pic" src="img/look-together.webp" alt="휴대폰을 든 어머니와 벨이 울리는 휴대폰을 든 아들, 그 사이 화면 위 빨간 동그라미" width="1200" height="620" loading="lazy">
         </div></article>
         <article class="shell b-soon reveal"><div class="core">
           <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="7" width="12" height="18" rx="2"/><rect x="15" y="5" width="12" height="18" rx="2" transform="rotate(8 21 14)"/></svg>
@@ -222,7 +241,7 @@ section.tint .step .n { background: var(--paper-2); }
 <footer class="wrap foot">
   <div class="cols">
     <div class="about"><a class="logo" href="./"><span class="seal">효</span>하루효도</a><p>놀이가 건강이 되고, 하루가 효도가 됩니다. 위리드코퍼레이션이 만드는 시니어 생활 서비스입니다.</p></div>
-    <div><h4>서비스</h4><ul><li><a href="smartmatgo.html">스마트 맞고</a></li><li><a href="./#services">준비 중인 서비스</a></li><li><a href="about.html">회사 소개</a></li></ul></div>
+    <div><h4>서비스</h4><ul><li><a href="smartmatgo.html">스마트 맞고</a></li><li><a href="look.html">이거 좀 봐 줄래</a></li><li><a href="./#services">준비 중인 서비스</a></li><li><a href="about.html">회사 소개</a></li></ul></div>
     <div><h4>고객 지원</h4><ul><li><a href="support.html">고객센터 · 자주 묻는 질문</a></li><li><a href="https://registr0716.github.io/smartmatgo/privacy.html" target="_blank" rel="noopener"><b>개인정보처리방침</b></a></li><li><a href="https://registr0716.github.io/smartmatgo/terms.html" target="_blank" rel="noopener">이용약관</a></li><li><a href="https://registr0716.github.io/smartmatgo/delete.html" target="_blank" rel="noopener">계정·기록 삭제 안내</a></li></ul></div>
   </div>
   <div class="biz">
